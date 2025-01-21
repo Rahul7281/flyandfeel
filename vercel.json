@@ -1,17 +1,19 @@
-
 {
-    "builds": [
-      {
-        "src": "flyandfeel/wsgi.py",
-        "use": "@vercel/python",
-        "config": {"maxlambdaSize": "15gb", "runtime":"python3.11.5"}
+  "version": 2,
+  "builds": [
+    {
+      "src": "flyandfeel/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15gb",
+        "runtime": "python3.11"
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "flyandfeel/wsgi.py"
-      }
-    ]
-  }
-  
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "flyandfeel/wsgi.py"
+    }
+  ]
+}
