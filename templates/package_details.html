@@ -1,0 +1,1005 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist - Travel Agency HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        } */
+        h2 {
+            color: #333;
+            font-size: 17px;
+        }
+        .container1 {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        
+        }
+        .section {
+            width: 48%;
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+           
+            border-radius: 5px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin: 8px 0;
+        }
+
+    /* body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    } */
+
+    .container4 {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    .packages {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .package {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+ 
+
+    .package .price {
+      font-size: 28px;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .package p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .package ul {
+      text-align: left;
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .package ul li {
+      display: flex;
+      align-items: center;
+    }
+
+    .package ul li:before {
+      content: '✔';
+      color:#990000;
+      font-size: 16px;
+    }
+
+    .btn1 {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #009900;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      width: auto;
+    }
+
+    .btn1:hover {
+      background-color: #00e600;
+      color: white;
+    }
+
+    .note {
+      color: #555;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .note span {
+      color: #990000;
+      font-weight: bold;
+    }
+
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+      
+        <!-- <div class="container" style="background-image: url('{{ details.image.url }}'); background-size: cover; background-position: center;"> -->
+        <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+            <div class="container py-5">
+                <div class="row justify-content-center py-5">
+                    <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                        <h1 class="display-3 text-white animated slideInDown">{{details.tour_type}} package details</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                <li class="breadcrumb-item text-white active" aria-current="page">Booking</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+
+    <!-- Process Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Package - details</h6>
+                <h1 class="mb-5">{{details.tour_title_details}}</h1>
+                <ul style="text-align: left; color: black; font-size: 18px;">
+                    {% for item in description.splitlines %}
+                    <p>{{ item }}</p>
+                    {% endfor %}
+                </ul>
+                <br>
+                <div class="container1">
+                <div class="section" style="text-align: left;">
+                                 
+                    {% if description1 %}
+                    {% with description1.splitlines as lines %}
+                        {% if lines|length > 0 %}
+                            <!-- Use the first line as the header -->
+                            <h5 style="color: #990000;">{{ lines.0 }}</h5>
+                            <!-- Use the rest of the lines as list items -->
+                            <ul >
+                                {% for item in lines|slice:"1:" %}
+                                <li >{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    <!-- <p>No description available.</p> -->
+                {% endif %}
+              
+                    <!-- <ul>
+                        <li>{{include|linebreaks}}</li>
+                        <li>Universal Studios tour on SIC</li>
+                        <li>Sentosa Island - Cable car</li>
+                        <li>Madame Tussauds 4in1</li>
+                        <li>Wings of Time on SIC</li>
+                        <li>Marina Bay Sands Sky Park on SIC</li>
+                    </ul> -->
+
+                    <!-- {% if include %}
+                    <ul>
+                        {% for item in include.splitlines %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No sightseeing information available.</p>
+                    {% endif %} -->
+                </div>
+                <div class="section" style="text-align: left; ">
+             
+                    {% if description2 %}
+                    {% with description2.splitlines as lines %}
+                        {% if lines|length > 0 %}
+                            <!-- Use the first line as the header -->
+                            <h5 style="color: #990000;">{{ lines.0 }}</h5>
+                            
+                            <!-- Use the rest of the lines as list items -->
+                            <ul>
+                                {% for item in lines|slice:"1:" %}
+                                <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    <!-- <p>No description available.</p> -->
+                {% endif %}
+                    <!-- <ul>
+                        <li>{{not_include|linebreaks}}</li>
+                        <li>Half day Kuala Lumpur city tour with KL Tower</li>
+                        <li>Twin Tower tickets on PVT</li>
+                        <li>KL hotel to Genting hotel transfers</li>
+                        <li>Enroute Batu Caves 20 minutes photo stop on PVT</li>
+                        <li>Genting outdoor theme park tickets</li>
+                    </ul> -->
+                </div>
+            </div>
+                
+                <br>
+             
+
+            </div>
+            
+
+            <div class="row gy-5 gx-4 justify-content-center">
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-calendar-day fa-3x text-white"></i>
+                        </div>
+                      
+                        <h5 class="mt-4">{{ total_night }} Nights {{total_days}} Days</h5>
+                      
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <!-- <p class="mb-0">{{details.start_date}} To {{details.end_date}}</p> -->
+                        <!-- <p class="mb-0">
+                            {{ details.start_date }} To {{ details.end_date }}
+                        </p>
+                         -->
+                     
+                        <p class="mb-0">
+                            {{start_month}} To {{end_month}}
+                        </p>
+                    
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-hotel fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Accommodation</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Regular and Premium</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fas fa-bread-slice fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Meal</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Breakfast</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+
+
+
+
+            
+  
+
+        
+  <br>
+  <br>
+
+    <div class="container" style="height: fit-content;">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="text-align: left;">
+            <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
+            <h1 class="mb-5">Package of {{tour_name_before_package}}  tour</h1>
+            <!-- <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p> -->
+            <hr style="border: 2px solid red; margin-top: -20px;">
+
+        </div>
+        <div class="row " style="margin-top: -40px;">
+            <div class="col-lg-8 col-sm-6 wow fadeInUp" data-wow-delay="0.2s" >
+                <div class="box" >
+                    <div class="p-5">
+                        <h5 >Inclusion</h5>
+                        <ul>
+                            {% for item in include.splitlines %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <style>
+          
+            </style>
+            <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s" >
+                <div class="box">
+                    <div class="p-5">
+                        <h5>Not Included</h5>
+                        <ul>
+                            {% for item in not_include.splitlines %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                      
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.4s"  >
+                <div class="box" >
+                    <div class="p-5">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            {% for item in table_of_content.splitlines %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                      
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <hr style="border: 2px solid red; margin-top: -50px;">
+    <div class="row gy-5 gx-4 justify-content-center" style="align-items: center;">
+        <!-- Deluxe Package -->
+        {% if details.deluxe_price_per_person and deluxe %}
+        <div class="col-lg-6 col-sm-8 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+            <h3>Deluxe Package</h3>
+            <hr class="w-25 mx-auto bg-primary mb-1">
+            <hr class="w-50 mx-auto bg-primary mt-0">
+            <p class="price" style="font-size: 40px;"><strong>₹{{ details.deluxe_price_per_person }}/-</strong></p>
+            <p>Per person</p>
+            {% for item in deluxe.splitlines %}
+            <p style="font-size: 17px; color: black;"><strong>{{ item }}</strong></p>
+            {% endfor %}
+            <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a>
+            <p class="note" style="font-size: 20px;">Or Call on <span>98250 10880</span></p>
+        </div>
+        {% endif %}
+    
+        <!-- Super Deluxe Package -->
+        {% if details.super_deluxe_price_per_person and super_deluxe %}
+        <div class="col-lg-6 col-sm-8 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+            <h3>Super Deluxe Package</h3>
+            <hr class="w-25 mx-auto bg-primary mb-1">
+            <hr class="w-50 mx-auto bg-primary mt-0">
+            <p class="price" style="font-size: 40px;"><strong>₹{{ details.super_deluxe_price_per_person }}/-</strong></p>
+            <p>Per person</p>
+            {% for item in super_deluxe.splitlines %}
+            <p style="font-size: 17px;"><strong>{{ item }}</strong></p>
+            {% endfor %}
+            <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a>
+            <p class="note" style="font-size: 20px;">Or Call on <span>98250 10880</span></p>
+        </div>
+        {% endif %}
+    </div>
+    
+    
+
+    <hr style="border: 2px solid red; ">
+
+
+
+
+    <div class="container-xxl py-5" style="margin-top: -50px;">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="text-align: left;">
+                <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
+                <h1 class="mb-5">Itinerary of {{tour_name_before_package}} Package Tour</h1>
+            </div>
+
+            <div class="nav" style="">
+                <ul>
+                    {% for day in days_details %}
+                        <li class="" onclick="showContent({{ forloop.counter }})" style="background-color: #009FBD;">
+                           Day {{ forloop.counter }}
+                        </li>
+                    {% empty %}
+                        <li>No days wise details found for this tour.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="content">
+                {% for day in days_details %}
+                    <div id="content-day-{{ forloop.counter }}" class="content-day">
+                        <h2 class="mb-5"> <span style="color: black;">{{ day.day_wise_plan }}</span></h2>
+                        <ul class="mb-5" style="margin-top: -30px;">
+                            {% for part in day.description_split %}
+                                <li>{{ part }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            
+
+            <script>
+                function showContent(dayNumber) {
+                    // Hide all content
+                    document.querySelectorAll('.content-day').forEach((content) => {
+                        content.classList.remove('active');
+                    });
+
+                    // Show the selected day's content
+                    document.getElementById(`content-day-${dayNumber}`).classList.add('active');
+                }
+
+                // Automatically show the first day's content if available
+                document.addEventListener("DOMContentLoaded", () => {
+                    const firstContent = document.querySelector('.content-day');
+                    if (firstContent) firstContent.classList.add('active');
+                });
+            </script>
+        </div>
+    </div>
+    <hr style="border: 2px solid red; margin-top: -70px;">
+           
+    </div>
+</div>
+<style>
+    /* General styling */
+    body {
+        font-family: Arial, Helvetica, sans-serif; /* Website font-family */
+        color: #333; /* Default text color */
+    }
+    /* Section title */
+ 
+
+    .nav {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .nav ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+    }
+
+    .nav ul li {
+        background-color: #dc3545; /* Red color */
+        color: white;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 7px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .nav ul li:hover {
+        background-color: #b22d3a; /* Darker red on hover */
+    }
+
+    .content div {
+        display: none;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .content div.active {
+        display: block;
+    }
+
+    .text-primary {
+        color: #007bff; /* Primary text color */
+        font-weight: bold;
+    }
+
+    .content p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="container-xxl py-6" >
+    <div class="container" >
+        <div class="row g-5">
+            <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    {% if details.summary_image %}
+                    <!-- If summary_image exists, show it -->
+                    <img class="img-fluid position-absolute w-100 h-100" src="{{ details.summary_image.url }}" alt="" style="object-fit: cover;">
+                {% else %}
+                    <!-- If summary_image doesn't exist, show fallback image -->
+                    <img class="img-fluid position-absolute w-100 h-100" src="{% static 'img/about.jpg' %}" alt="" style="object-fit: cover;">
+                {% endif %}
+                </div>
+            </div>
+            <div class="col wow fadeInUp" data-wow-delay="0.3s" >
+                <h6 class="section-title bg-white text-start text-primary pe-6">Summary</h6>
+                <h1 class="mb-6">Summary of<span class="text-primary">  <b style="color: #33cccc;">{{tour_name_before_package}}</b> </span>Tour</h1>
+
+                <div class="row gy-2 gx-4 mb-4">
+                   
+                    {% for item in summary.splitlines %}
+
+                    <div class="col-sm-10">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ item }}</p>
+                    </div>
+                    {% endfor %}
+
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+    <!-- Process Start -->
+
+    <!-- Booking Start -->
+    <!-- <div class="container-xxl py-5" data-wow-delay="0.1s"> -->
+       
+            <div class="booking p-5">
+                <div class="row g-8 align-items-center">
+                    <div class="col-md-6 text-white">
+                        <h6 class="text-white text-uppercase">Booking</h6>
+                        <h1 class="text-white mb-4">Online Booking</h1>
+                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <a class="btn btn-outline-light py-3 px-5 mt-2" href="">Read More</a>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="text-white mb-4">Book A Tour</h1>
+                        
+
+
+                    <!-- Your existing HTML content goes here -->
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <!-- First Name -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-transparent" id="first_name" name="first_name" placeholder="First Name" required>
+                                    <label for="first_name" style="color: white;">First Name</label>
+                                </div>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-transparent" id="last_name" name="last_name" placeholder="Last Name" required>
+                                    <label for="last_name"  style="color: white;">Last Name</label>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control bg-transparent" id="email" name="email" placeholder="Email" required>
+                                    <label for="email"  style="color: white;">Email</label>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-transparent" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                                    <label for="phone_number"  style="color: white;">Phone Number</label>
+                                </div>
+                            </div>
+
+                            <!-- Passport Number -->
+                            <!-- <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-transparent" id="passport_number" name="passport_number" placeholder="Passport Number">
+                                    <label for="passport_number"  style="color: white;">Passport Number</label>
+                                </div>
+                            </div> -->
+
+                            <!-- Nationality -->
+                            <!-- <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-transparent" id="nationality" name="nationality" placeholder="Nationality" required>
+                                    <label for="nationality"  style="color: white;">Nationality</label>
+                                </div>
+                            </div> -->
+
+                            <!-- Number of People -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control bg-transparent" id="number_of_people" name="number_of_people" placeholder="Number of People" min="1" required>
+                                    <label for="number_of_people" style="color: white;">Number of People</label>
+                                </div>
+                            </div>
+
+                        
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-control bg-transparent" id="total_amount" name="total_amount" required>
+                                        <option value="" disabled selected>Select Packages</option>
+                                        <option value="{{ details.deluxe_price_per_person }}">Deluxe</option>
+                                        <option value="{{ details.super_deluxe_price_per_person }}">Super Deluxe</option>
+                                    </select>
+                                    <label for="total_amount" style="color: white;">Select Packages</label>
+                                </div>
+                            </div>
+
+                            <!-- Payment Status (Read-Only Default Pending) -->
+
+                            <!-- Submit Button -->
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-outline-light py-3 px-5" style="float: right;"> Submit</button>
+
+                            </div>
+                        </div>
+                    </form>
+                        
+                        
+         
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Booking Start -->
+    
+
+    <div class="container-xxl py-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">International packages</h6>
+            {% if details.tour_type == 'international'%}
+            <h1 class="mb-5">Explore Upcoming International Tour Packages</h1>
+            {% endif %}
+            {% if details.tour_type == 'domestic'%}
+            <h1 class="mb-5">Explore Upcoming Domestic Tour Packages</h1>
+            {% endif %}
+        </div>
+
+        <!-- Swiper Slider -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                
+                {% if details.tour_type == 'international'%}
+                {% for x in tours_international %}
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="destination-card">
+                        <div class="col-lg-12 col-md-6 wow fadeInUp" data-wow-delay="0.1s" >
+                            <div class="package-item" style=" border: 1px solid #ffb3b3;">
+                                <div class="overflow-hidden">
+        
+                                {% if x.image %}
+                                
+                                    <img class="img-fluid" src="{{ x.image.url }}" alt="" style="height: 150px; width: 100%;">
+                                {% else %}
+                                    <img class="img-fluid" src="default-image.jpg" alt="Default image" style="height: 200px;">
+                                {% endif %}
+                                </div>
+                                <div class="d-flex border-bottom">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{x.tour_name}}</small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3 days</small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h3 class="mb-0">₹ {{x.deluxe_price_per_person}}/-</h3>
+                                    <h8 class="mb-0">Per - Person</h8>
+                                    <div class="mb-3">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                    <p  style=" font-size: 17px; color: gray;"><strong>{{x.tour_name}}</strong></p>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                        <!-- <a href="accounts/package_details.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
+                                        
+                                        
+                                        <a href="{% url 'package_details' x.id %}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if details.tour_type == 'domestic'%}
+                {% for x in tours_domestic %}
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="destination-card">
+                        <div class="col-lg-12 col-md-6 wow fadeInUp" data-wow-delay="0.1s" >
+                            <div class="package-item" style=" border: 1px solid #ffb3b3;">
+                                <div class="overflow-hidden">
+        
+                                {% if x.image %}
+                                
+                                    <img class="img-fluid" src="{{ x.image.url }}" alt="" style="height: 150px; width: 100%;">
+                                {% else %}
+                                    <img class="img-fluid" src="default-image.jpg" alt="Default image" style="height: 200px;">
+                                {% endif %}
+                                </div>
+                                <div class="d-flex border-bottom">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{x.tour_name}}</small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3 days</small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h3 class="mb-0">₹ {{x.deluxe_price_per_person}}/-</h3>
+                                    <h8 class="mb-0">Per - Person</h8>
+                                    <div class="mb-3">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                    <p  style=" font-size: 17px; color: gray;"><strong>{{x.tour_name}}</strong></p>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                        <!-- <a href="accounts/package_details.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
+                                        
+                                        
+                                        <a href="{% url 'package_details' x.id %}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                
+                <!-- Slide 2 -->
+            </div>
+
+
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        } */
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px;
+          
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+     
+
+        .swiper-container {
+            width: 100%; /* Ensure the slider fits within the viewport */
+            overflow: hidden; /* Prevent content overflow */
+        }
+
+        .swiper-slide {
+            box-sizing: border-box; /* Include padding and borders in width */
+        }
+
+        .destination-card {
+            background-color: white;
+            color: black;
+            /* border-radius: 10px; */
+            overflow: hidden;
+            flex: 1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: left;
+            border: 1px solid #ffb3b3;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .destination-content {
+            padding: 15px;
+        }
+
+        .destination-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #990000;
+        }
+
+        .destination-content p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .destination-content button {
+            background-color: #990000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            /* border-radius: 5px; */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .destination-content button:hover {
+            background-color: #ff5f1f;
+        }
+    </style>
+    <!-- Include Swiper's JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+            },
+            spaceBetween: 20, // Add space between slides to prevent overflow
+        });
+    </script>
+    
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                
+                <div class="col wow fadeInUp" data-wow-delay="0.3s">
+                    <!-- <h6 class="section-title bg-white text-start text-primary pe-6">Thank you for visiting the website of Fly n Feel Holidays (I) Pvt. Ltd.!</h6> -->
+                    <h1 class="mb-6" style="font-size: 24px;"> Thank you <span class="text-primary"> 
+                        for visiting the website of Fly n Feel Holidays (I) Pvt. Ltd.!</span></h1>
+                    <p class="mb-6">The Privacy Policy is applicable to the website as well as other customer interface of Fly n Feel Holidays (I) Pvt. Ltd (FNFHIPL). This privacy statement also does not apply to the website of our business partners, corporate affiliates or to any other third parties, even if their website is linked to FNFHIPL. We recommend you review the privacy statements of the other parties with whom you interact.</p>
+                    <p class="mb-6">For the purposes of this privacy policy, “corporate affiliates” means any entity or joint venture that is wholly or partially owned or controlled by FNFHIPL. “Business partners” means any subcontractor, vendor or other entity with whom we have an ongoing business relationship to provide products, services, or information.</p>                  
+                    <p class="mb-6">The following policy governs the collection, use and protection of your Personal Information by the Website as well as the overall protection of our online visitors. This Privacy Policy shall be applicable to users or customers who visit the website and purchases any product or services from the website.</p>
+                    <p class="mb-6">By visiting website you have agreed to the following Privacy Policy.
+
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Back to Top -->
+    <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+    
+    <!-- Button 2: Icon and Text -->
+    <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" style="width: 200px; text-align: center; display: flex; justify-content: center; align-items: center;">
+        <i class="bi bi-arrow-up" style="margin-right: 8px;"></i> Back to Top
+    </a> -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+                /* hide content and show on click */
+
+        $(document).ready(function(){
+        $("li").click( function() { 
+
+        // find which li was clicked
+        var classClicked = $(this).attr('class');
+
+        //remove "show" class from any previously clicked li
+        $(".content div").removeClass( "show" );
+
+        //add show class to the div corresponding the clicked li
+        $(".content-" + classClicked).addClass("show"); 
+        });
+        });
+    </script>
+    {% if messages %}
+    <script type="text/javascript">
+        window.onload = function() {
+            {% for message in messages %}
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: "{{ message }}",  // Show the message text
+                }).then((result) => {
+                    // Redirect to 'my_booking' page when the user clicks "OK"
+                    if (result.isConfirmed) {
+                        window.location.href = "{% url 'my_booking' %}";  // Redirect to the 'my_booking' page
+                    }
+                });
+            {% endfor %}
+        }
+    </script>
+    {% endif %}
+</body>
+
+</html>
+    {% endblock %}

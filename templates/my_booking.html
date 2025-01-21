@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+        
+
+        <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+            <div class="container py-5">
+                <div class="row justify-content-center py-5">
+                    <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                        <h1 class="display-3 text-white animated slideInDown">Our Booking</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                <li class="breadcrumb-item text-white active" aria-current="page">About</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+    <h1 class="mb-6" style="text-align: center;">Our <span class="text-primary"> Booking</span></h1>
+
+ 
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <table summary="This table shows how to create responsive tables using Datatables' extended functionality" class="table table-bordered table-hover dt-responsive">
+        <!-- <caption class="text-center">An example of a responsive table based on <a href="https://datatables.net/extensions/responsive/" target="_blank">DataTables</a>:</caption> -->
+        <thead>
+          <tr>
+            <th>Booking ID:</th>
+            <th>Tourist:</th>
+            <th>Tour:</th>
+            <th>Number of People:</th>
+            <th>Total Amount:</th>
+            <th>Payment Status:</th>
+            <th>Booking Status:</th>
+            <th>Booking Date:</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+          <tr>
+            <td> {{ booking.id }}</td>
+            <td>{{ booking.tourist.first_name }} {{ booking.tourist.last_name }}</td>
+            <td>{{ booking.tour.tour_name }}</td>
+            <td>{{ booking.number_of_people }}</td>
+            <td>{{ booking.total_amount }}</td>
+            <td>{{ booking.payment_status }}</td>
+            <td>{{ booking.booking_status }}</td>
+            <td>{{ booking.created_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+    <!-- Back to Top -->
+
+
+{% endblock %}

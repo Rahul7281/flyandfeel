@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Ticket Booking - Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+   
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            height: 99vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        h2 {
+            color: #e60000; /* Red */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            height: 100vh; /* Take 80% of viewport height */
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Allow scrolling inside the container if needed */
+        }
+
+     
+  
+
+        .btn-danger {
+            background-color: #e60000;
+            border-color: #e60000;
+            color: #fff;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h2 style="font-family: 'Times New Roman', serif;  ">Fly and Feel Pvt. Ltd. - Register for Tour Ticket Booking</h2>
+        <br>
+
+        <form class="well form-horizontal" method="POST" id="contact_form" >
+            {% csrf_token %}
+   
+                <!-- Form Name -->
+            
+                <!-- First Name -->
+                <div class="form-group">
+                    <label class="col-md-1 control-label" for="first_name">Username</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="username" placeholder="First Name" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="first_name">First Name</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="first_name" placeholder="First Name" class="form-control" type="text" required>
+                        </div>
+                    </div>
+       
+                    <label class="col-md-1 control-label" for="last_name">Last Name</label> 
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="last_name" placeholder="Last Name" class="form-control" type="text" required>
+                        </div>
+                    </div>
+               
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label" for="email">E-Mail</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input name="email" placeholder="E-Mail Address" class="form-control" type="email" required>
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="phone">Phone</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                            <input name="phone" placeholder="(845) 555-1212" class="form-control" type="tel" required>
+                        </div>
+                    </div>
+               
+
+            
+                    <label class="col-md-1 control-label" for="address"> Profile</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input name="image" id="file-upload" class="form-control" type="file" required>                        </div>
+                    </div>
+                </div>
+
+                <!-- City -->
+                <div class="form-group">
+                    <label class="col-md-1 control-label" for="country">Country</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                            <input name="country" placeholder="Country" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="state">State</label>
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <input name="state" placeholder="State" class="form-control" type="text" required>
+
+                           
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="city">City</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input name="city" placeholder="City" class="form-control" type="text" required>
+                        </div>
+                    </div>
+               
+                    
+                </div>
+
+                <!-- Postal Code -->
+                <div class="form-group">
+                    <label class="col-md-1 control-label" for="state">Gender</label>
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <select name="gender" class="form-control" required>
+                                <option value="">Please select your state</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                              
+                                <!-- More options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="postal_code">Postal Code</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input name="postal_code" placeholder="Postal Code" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="address">Address</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input name="address" placeholder="Street Address" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="col-md-1 control-label" for="password">Password</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input name="password1" placeholder="Password" class="form-control" type="password" required>
+                        </div>
+                    </div>
+              
+                    <label class="col-md-1 control-label" for="confirm_password">Confirm Password</label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input name="password2" placeholder="Confirm Password" class="form-control" type="password" required>
+                        </div>
+                    </div>
+                    <label class="col-md-1 control-label" for="emergency_contact_phone">Emergency Contact </label>  
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                            <input name="emergency_contact" placeholder="Emergency Contact Phone" class="form-control" type="tel" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact Phone -->
+           
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <label class="col-md-8 control-label"></label>
+                    <div class="col-md-2">
+                        <a href="signin.html" class="btn btn-danger">Sign In <span class="glyphicon glyphicon-send"></span></a>
+                    </div>
+          
+
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-danger">Sign Up <span class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+
+        </form>
+    </div>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
