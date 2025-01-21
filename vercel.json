@@ -5,8 +5,8 @@
       "src": "flyandfeel/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "15gb",
-        "runtime": "python3.10" 
+        "runtime": "python3.10",  // Ensure using Python 3.10 or higher
+        "maxLambdaSize": "15gb"
       }
     }
   ],
