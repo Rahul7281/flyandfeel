@@ -82,27 +82,24 @@ WSGI_APPLICATION = 'flyandfeel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  
         'NAME': 'flyandfeel',                  
-        'USER': 'root',                     
-        'PASSWORD': 'root',              
-        'HOST': 'localhost',                  
+        'USER': 'RahulSuthar7281',                     
+        'PASSWORD': 'rahul7280',              
+        'HOST': 'RahulSuthar7281.mysql.pythonanywhere-services.com',                  
         'PORT': '3306',                       
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
