@@ -62,6 +62,7 @@ class CustomUser(AbstractUser):
     postal_code = models.CharField(max_length=10, blank=True, null=True)
     emergency_contact = models.CharField(max_length=15, blank=True, null=True)
     image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     # You can also define the user manager if needed (below).
 
