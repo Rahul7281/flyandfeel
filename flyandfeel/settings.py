@@ -89,27 +89,32 @@ DATABASES = {
     }
 }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'flyandfeel',                  
-        'USER': 'root',                     
-        'PASSWORD': 'root',              
-        'HOST': 'localhost',                  
-        'PORT': '3306',                       
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',  # Use MySQL database backend
+#         'NAME': 'RahulSuthar7281$flyandfeel',  # Database name
+#         'USER': 'RahulSuthar7281',             # MySQL username
+#         'PASSWORD': 'rahul7280',               # MySQL password
+#         'HOST': 'RahulSuthar7281.mysql.pythonanywhere-services.com',  # MySQL host
+#         'PORT': '3306',                        # Default MySQL port
+#         'OPTIONS': {
+#             'sql_mode': 'STRICT_TRANS_TABLES',  # Enable strict mode to catch invalid queries
+#         },
+#     }
+# }
+
+
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',  
-#         'NAME': 'flyandfeel',                  
-#         'USER': 'RahulSuthar7281',                     
-#         'PASSWORD': 'rahul7280',              
-#         'HOST': 'RahulSuthar7281.mysql.pythonanywhere-services.com',                  
-#         'PORT': '3306',                       
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'RahulSuthar7281$flyandfeel',
+#         'USER': 'RahulSuthar7281',
+#         'PASSWORD': 'rahul7280',
+#         'HOST': 'RahulSuthar7281.mysql.pythonanywhere-services.com',
 #     }
 # }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
