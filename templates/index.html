@@ -546,7 +546,7 @@
                                 {% for x in domestic_tours %}
                                 <div class="col-md-6 col-lg-4">
                                     <div class="national-item">
-                                        <img src="{{x.image.url}}" class="img-fluid w-100 rounded" alt="Image" style="height: 200px;">
+                                        <img src="{{x.image.url}}"  class="img-fluid w-100 rounded" alt="Image" style="height: 200px;">
                                         <div class="national-content">
                                             <div class="national-info">
                                                 <h5 class="text-white text-uppercase mb-2">{{x.tour_name}}</h5>
@@ -645,7 +645,7 @@
                                             <a href="{% url 'tour_details' tour_name=x.tour_name %}" class="btn-hover text-white"><i class="fa fa-eye ms-2"></i> <span>143+ Tour Places</span></a>
                                         </div>
                                     </div>
-                                    <div class="tour-offer bg-success">30% Off</div>
+                                    <!-- <div class="tour-offer bg-success">30% Off</div> -->
                                     <div class="international-plus-icon">
                                         <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
                                     </div>
