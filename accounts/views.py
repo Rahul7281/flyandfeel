@@ -398,5 +398,6 @@ def team(request):
 
 def tour_details(request, tour_name):
     tour = Tour.objects.filter(tour_name=tour_name)
+    details = get_object_or_404(Tour, tour_name=tour_name)
     print(tour)
-    return render(request, 'tour_details.html',{'tour':tour})
+    return render(request, 'tour_details.html',{'tour':tour, 'details':details})

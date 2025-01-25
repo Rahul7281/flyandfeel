@@ -91,11 +91,11 @@
                             </div>
                             <p  style=" font-size: 17px; color: gray;"><strong>{{x.tour_name}}</strong></p>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <!-- <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a> -->
                                 <!-- <a href="accounts/package_details.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
                                 
                                 
-                                <a href="{% url 'package_details' x.id %}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                <a href="{% url 'package_details' x.id %}" class="btn btn-sm btn-primary px-3" style="border-radius:30px; width: 200px;">Read More</a>
                             </div>
                         </div>
                     </div>
