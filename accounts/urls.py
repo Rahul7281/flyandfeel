@@ -19,6 +19,7 @@ urlpatterns = [
     path('Domestic_packges.html', views.Domestic_packges, name='Domestic_packges'),
     # path('accounts/package_details.html', views.package_details, name='package_details'),
     path('<int:id>/package_details.html', views.package_details, name='package_details'),
+    path('<str:tour_name>/tour_details.html', views.tour_details, name='tour_details'),
 
     #  path('package-details/<int:id>/', views.package_details, name='package_details'),
     path('signup.html', views.signup, name='signup'),

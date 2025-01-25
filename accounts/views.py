@@ -349,8 +349,12 @@ def package_details(request, id):
         'super_deluxe': formatted_data6,
         'tourists': tourists,
     })
+
 @csrf_exempt
 def signin(request):
+    # Get the 'next' URL from the GET request, or default to home page
+    next_url = request.GET.get('next', '/')
+    
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -359,15 +363,14 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            # Add a success message
-            # messages.success(request, 'Login successful!')
-            return redirect('/')
+            # Redirect to the 'next' page or default to home page
+            return redirect(request.POST.get('next', '/'))
         else:
-            # Add an error message for invalid credentials
-            # messages.error(request, 'Invalid credentials. Please try again.')
+            # If authentication fails, redirect back to the sign-in page
             return redirect('signin')
     else:
-        return render(request, 'signin.html')
+        # If GET request, just render the sign-in page
+        return render(request, 'signin.html', {'next': next_url})
     
 def my_booking(request):
     user = request.user  # Get the logged-in user
@@ -392,3 +395,8 @@ def admin_homepage(request):
 
 def team(request):
     return render(request, 'team.html')
+
+def tour_details(request, tour_name):
+    tour = Tour.objects.filter(tour_name=tour_name)
+    print(tour)
+    return render(request, 'tour_details.html',{'tour':tour})

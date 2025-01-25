@@ -108,7 +108,7 @@
     
                   
                     {% if user.is_authenticated %}
-                    <h5 style="font-size: 23px; margin-top: 10px; color: #129622;">Welcome : {{user.username}}</h5>
+                    <h5 style="font-size: 23px; margin-top: 10px; color: yellow;">Welcome : {{user.username}}</h5>
                     &nbsp;&nbsp;
                     <a href="/logout" class="btn btn-primary rounded-pill py-2 px-3">Logout</a>
                     <!-- <li><a href="accounts/logout">Logout</a></li> -->
@@ -199,7 +199,7 @@
         <!-- Services End -->
 
         <!-- Destination Start -->
-        <div class="container-fluid destination py-7" >
+        <div class="container-fluid destination py-5" >
             <div class="container py-5">
                 <div class="mx-auto text-center mb-">
                     <h5 class="section-title px-3">Destination</h5>
@@ -510,12 +510,13 @@
         <!-- Explore Tour Start -->
         <div class="container-fluid ExploreTour py-5" style="margin-top: -50px;">
             <div class="container py-8">
-                <div class="mx-auto text-center mb-5" style="max-width: 1000px;" >
+                <div class="mx-auto text-center  mb-6" style="" >
                     <h5 class="section-title px-3">Explore Tour</h5>
                     <h1 class="mb-4">The World</h1>
-                    <p class="mb-0" >Welcome to Fly N Feel Holidays (I) Pvt. Ltd., your trusted partner in creating unforgettable travel experiences! Founded with a passion for exploring the world and a commitment to providing exceptional service, we are a premier travel agency dedicated to turning your dream vacations into reality.</p>
+                    <p class="" style="font-size: 20px;">Welcome to Fly N Feel Holidays (I) Pvt. Ltd., your trusted partner in creating unforgettable travel experiences! Founded with a passion for exploring the world and a commitment to providing exceptional service, we are a premier travel agency dedicated to turning your dream vacations into reality.</p>
                 </div>
-                <div class="tab-class text-center">
+                <br>
+                <div class="tab-class text-center mb-3">
                     <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
                         <li class="nav-item">
                             <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#NationalTab-1">
@@ -538,7 +539,7 @@
                                         <div class="national-content">
                                             <div class="national-info">
                                                 <h5 class="text-white text-uppercase mb-2">{{x.tour_name}}</h5>
-                                                <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
+                                                <a href="{% url 'tour_details' tour_name=x.tour_name %}" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
                                             </div>
                                         </div>
                                         <div class="national-plus-icon">
@@ -630,7 +631,7 @@
                                         <div class="international-info">
                                             <h5 class="text-white text-uppercase mb-2">{{x.tour_name}}</h5>
                                             <a href="#" class="btn-hover text-white me-4"><i class="fas fa-map-marker-alt me-1"></i> 8 Cities</a>
-                                            <a href="#" class="btn-hover text-white"><i class="fa fa-eye ms-2"></i> <span>143+ Tour Places</span></a>
+                                            <a href="{% url 'tour_details' tour_name=x.tour_name %}" class="btn-hover text-white"><i class="fa fa-eye ms-2"></i> <span>143+ Tour Places</span></a>
                                         </div>
                                     </div>
                                     <div class="tour-offer bg-success">30% Off</div>

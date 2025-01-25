@@ -277,6 +277,12 @@ loginBtn.addEventListener('click', () => {
                     <input type="password" placeholder="Password" name="password" required>
                     <i class='bx bxs-lock-alt' ></i>
                 </div>
+                <div class="input-box">
+                    <!-- Corrected hidden field for next URL -->
+                    <input type="hidden" value="{{ next }}" name="next">
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+        
                 <div class="forgot-link">
                     <a href="#">Forgot Password?</a>
                 </div>
