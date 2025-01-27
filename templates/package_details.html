@@ -172,6 +172,7 @@
         <!-- <div class="container" style="background-image: url('{{ details.image.url }}'); background-size: cover; background-position: center;"> -->
         <div class="container-fluid bg-primary py-5 mb-5 hero-header">
             <div class="container py-5">
+                
                 <div class="row justify-content-center py-5">
                     <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
                         <h1 class="display-3 text-white animated slideInDown">{{tour_name_before_package}} </h1>
@@ -193,17 +194,28 @@
 
     <!-- Process Start -->
     <div class="container-xxl py-5">
+        <div class="col-12 text-center">
+            <!-- Buttons for package selection -->
+            <button type="button" class="btn btn-primary" id="deluxeBtn" onclick="togglePackage('deluxe')" style="margin-right: 10px;">
+                Deluxe Package
+            </button>
+            <button type="button" class="btn btn-primary" id="superDeluxeBtn" onclick="togglePackage('superDeluxe')">
+                Super Deluxe Package
+            </button>
+        </div>
+        
         <div class="container">
+            
             <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Package - details</h6>
-                <h1 class="mb-5">{{details.tour_title_details}}</h1>
-                <ul style="text-align: left; color: black; font-size: 18px;">
+                <!-- <h6 class="section-title bg-white text-center">Package - details</h6> -->
+                <h1 class="mb-5" style="font-family: Georgia, 'Times New Roman', Times, serif;">{{details.tour_title_details}}</h1>
+                <ul style="text-align: center; color: black; font-size: 18px;">
                     {% for item in description.splitlines %}
                     <p>{{ item }}</p>
                     {% endfor %}
                 </ul>
                 <br>
-                <div class="container1">
+                <div class="container1" style="max-width: 800px;">
                 <div class="section" style="text-align: left;">
                                  
                     {% if description1 %}
@@ -261,25 +273,82 @@
                 {% else %}
                     <!-- <p>No description available.</p> -->
                 {% endif %}
-                    <!-- <ul>
-                        <li>{{not_include|linebreaks}}</li>
-                        <li>Half day Kuala Lumpur city tour with KL Tower</li>
-                        <li>Twin Tower tickets on PVT</li>
-                        <li>KL hotel to Genting hotel transfers</li>
-                        <li>Enroute Batu Caves 20 minutes photo stop on PVT</li>
-                        <li>Genting outdoor theme park tickets</li>
-                    </ul> -->
+                    
                 </div>
             </div>
                 
-                <br>
+      
              
+                <hr style="border: 2px solid red; ">
 
             </div>
+
+            <div class="container-xxl py-5" style="margin-top: -80px;">
+                <div class="container">
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="text-align: left;">
+                        <!-- <h6 class="section-title bg-white text-center text-primary px-3">Services</h6> -->
+                        <h1 class="mb-5">Itinerary of {{tour_name_before_package}} Package Tour</h1>
+                    </div>
+        
+                    <div class="nav" style="">
+                        <ul>
+                            {% for day in days_details %}
+                                <li class="" onclick="showContent({{ forloop.counter }})" style="background-color: #009FBD;">
+                                   Day {{ forloop.counter }}
+                                </li>
+                            {% empty %}
+                                <li>No days wise details found for this tour.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <div class="content">
+                        {% for day in days_details %}
+                            <div id="content-day-{{ forloop.counter }}" class="content-day">
+                                <h2 class="mb-5"> <span style="color: black;">{{ day.day_wise_plan }}</span></h2>
+                                <ul class="mb-5" style="margin-top: -30px;">
+                                    {% for part in day.description_split %}
+                                        <li>{{ part }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    
+        
+                    <script>
+                        function showContent(dayNumber) {
+                            // Hide all content
+                            document.querySelectorAll('.content-day').forEach((content) => {
+                                content.classList.remove('active');
+                            });
+        
+                            // Show the selected day's content
+                            document.getElementById(`content-day-${dayNumber}`).classList.add('active');
+                        }
+        
+                        // Automatically show the first day's content if available
+                        document.addEventListener("DOMContentLoaded", () => {
+                            const firstContent = document.querySelector('.content-day');
+                            if (firstContent) firstContent.classList.add('active');
+                        });
+                    </script>
+                </div>
+            </div>
+            <hr style="border: 2px solid red; margin-top: -70px;">
+            <!-- <hr style="border: 2px solid red; margin-top: -50px;"> -->
+<div class="row gy-5 gx-4 justify-content-center" style="align-items: center;">
+    <!-- Radio buttons for package selection -->
+
+    <!-- Deluxe Package -->
+   
+
+<!-- <hr style="border: 2px solid red; margin-top: 50px;"> -->
             
 
             <div class="row gy-5 gx-4 justify-content-center">
-                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-3 col-sm-5 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="position-relative border border-primary pt-5 pb-4 px-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                             <i class="fa fa-calendar-day fa-3x text-white"></i>
@@ -300,8 +369,23 @@
                         </p>
                     
                     </div>
+                    <br>
+                    <br>
+                    <br>
+                   
+
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-phone fa-3x text-white"></i>
+                            
+                        </div>
+                        <h5 class="mt-4">Or Call on 98250 10880</h5>
+                        <!-- <hr class="w-25 mx-auto bg-primary mb-1"> -->
+                        <!-- <hr class="w-50 mx-auto bg-primary mt-0"> -->
+                        <!-- <p class="mb-0">Regular and Premium</p> -->
+                    </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-3 col-sm-5 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="position-relative border border-primary pt-5 pb-4 px-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                             <i class="fa fa-hotel fa-3x text-white"></i>
@@ -311,16 +395,135 @@
                         <hr class="w-50 mx-auto bg-primary mt-0">
                         <p class="mb-0">Regular and Premium</p>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
+                    <br>
+                    <br>
+                    <br>
+                  
                     <div class="position-relative border border-primary pt-5 pb-4 px-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                            <i class="fas fa-bread-slice fa-3x text-white"></i>
+                            <i class="fa fa-comment-dots fa-3x text-white"></i>
+                            
                         </div>
-                        <h5 class="mt-4">Meal</h5>
-                        <hr class="w-25 mx-auto bg-primary mb-1">
-                        <hr class="w-50 mx-auto bg-primary mt-0">
-                        <p class="mb-0">Breakfast</p>
+                        <!-- <h5 class="mt-4">Accommodation</h5> -->
+                        <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a>
+                        <!-- <p class="mb-0">Regular and Premium</p> -->
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center pt-4 ">
+                    <!-- <div class="position-relative border border-primary pt-5 pb-4 px-4"> -->
+                        <!-- Deluxe Package Section -->
+                        {% if details.deluxe_price_per_person and deluxe %}
+                        <div class="package-box deluxe-package" id="deluxePackage" style="display: none;">
+                            <h3>Deluxe Package</h3>
+                            <hr class="w-25 mx-auto bg-primary mb-1">
+                            <hr class="w-50 mx-auto bg-primary mt-0">
+                            <p class="price" style="font-size: 40px;"><strong>₹{{ details.deluxe_price_per_person }}/-</strong></p>
+                            <p>Per person</p>
+                            {% for item in deluxe.splitlines %}
+                                <p style="font-size: 17px; color: black;"><strong>{{ item }}</strong></p>
+                            {% endfor %}
+                            <!-- <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a> -->
+                            <!-- <p class="note" style="font-size: 20px;">Or Call on <span>98250 10880</span></p> -->
+                        </div>
+                        {% endif %}
+                
+                        <!-- Super Deluxe Package Section -->
+                        {% if details.super_deluxe_price_per_person and super_deluxe %}
+                        <div class="package-box super-deluxe-package" id="superDeluxePackage" style="display: none;">
+                            <h3>Super Deluxe Package</h3>
+                            <hr class="w-25 mx-auto bg-primary mb-1">
+                            <hr class="w-50 mx-auto bg-primary mt-0">
+                            <p class="price" style="font-size: 40px;"><strong>₹{{ details.super_deluxe_price_per_person }}/-</strong></p>
+                            <p>Per person</p>
+                            {% for item in super_deluxe.splitlines %}
+                                <p style="font-size: 17px;"><strong>{{ item }}</strong></p>
+                            {% endfor %}
+                            <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a>
+                            <p class="note" style="font-size: 20px;">Or Call on <span>98250 10880</span></p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <script>
+                    // Function to toggle visibility based on selected package
+                    function togglePackage(packageType) {
+                        // Hide both packages initially
+                        document.getElementById('deluxePackage').style.display = 'none';
+                        document.getElementById('superDeluxePackage').style.display = 'none';
+                
+                        // Show the selected package
+                        if (packageType === 'deluxe') {
+                            document.getElementById('deluxePackage').style.display = 'block';
+                            document.getElementById('superDeluxePackage').style.display = 'none';
+                        } else if (packageType === 'superDeluxe') {
+                            document.getElementById('deluxePackage').style.display = 'none';
+                            document.getElementById('superDeluxePackage').style.display = 'block';
+                        }
+                    }
+                
+                    // Initialize by showing the deluxe package by default
+                    window.onload = function() {
+                        togglePackage('deluxe');
+                    };
+                </script>
+                
+                <style>
+                    .package-box {
+                        border-radius: 10px;
+                        padding: 20px;
+                        background-color: #f9f9f9;
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                
+                    .package-box:hover {
+                        transform: translateY(-10px);
+                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+                    }
+                
+                    .deluxe-package {
+                        background-color: #f0f8ff;
+                    }
+                
+                    .super-deluxe-package {
+                        background-color: #e0f7fa;
+                    }
+                
+                    .price {
+                        color: #007bff;
+                        font-weight: bold;
+                    }
+                
+                    .btn1 {
+                        margin-top: 20px;
+                        background-color: #b32a2a;
+                        color: #fff;
+                        padding: 10px 30px;
+                        border-radius: 5px;
+                        text-decoration: none;
+                    }
+                
+                    .btn1:hover {
+                        background-color: yellowgreen;
+                    }
+                
+                    .btn {
+                        margin-top: 20px;
+                        padding: 12px 30px;
+                        border-radius: 5px;
+                    }
+                
+                    .btn-primary {
+                        background-color: #bd231b;
+                        border-color: #b60e0e;
+                    }
+                
+                    .btn-primary:hover {
+                        background-color: yellow;
+                        border-color: yellowgreen;
+                    }
+                </style>
                     </div>
                 </div>
             </div>
@@ -336,12 +539,11 @@
   
 
         
-  <br>
-  <br>
+
 
     <div class="container" style="height: fit-content;">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="text-align: left;">
-            <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
+            <!-- <h6 class="section-title bg-white text-center text-primary px-3">Services</h6> -->
             <h1 class="mb-5">Package of {{tour_name_before_package}}  tour</h1>
             <!-- <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p> -->
             <hr style="border: 2px solid red; margin-top: -20px;">
@@ -392,41 +594,7 @@
         </div>
     </div>
 
-    <hr style="border: 2px solid red; margin-top: -50px;">
-    <div class="row gy-5 gx-4 justify-content-center" style="align-items: center;">
-        <!-- Deluxe Package -->
-        {% if details.deluxe_price_per_person and deluxe %}
-        <div class="col-lg-6 col-sm-8 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
-            <h3>Deluxe Package</h3>
-            <hr class="w-25 mx-auto bg-primary mb-1">
-            <hr class="w-50 mx-auto bg-primary mt-0">
-            <p class="price" style="font-size: 40px;"><strong>₹{{ details.deluxe_price_per_person }}/-</strong></p>
-            <p>Per person</p>
-            {% for item in deluxe.splitlines %}
-            <p style="font-size: 17px; color: black;"><strong>{{ item }}</strong></p>
-            {% endfor %}
-            <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a>
-            <p class="note" style="font-size: 20px;">Or Call on <span>98250 10880</span></p>
-        </div>
-        {% endif %}
-    
-        <!-- Super Deluxe Package -->
-        {% if details.super_deluxe_price_per_person and super_deluxe %}
-        <div class="col-lg-6 col-sm-8 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
-            <h3>Super Deluxe Package</h3>
-            <hr class="w-25 mx-auto bg-primary mb-1">
-            <hr class="w-50 mx-auto bg-primary mt-0">
-            <p class="price" style="font-size: 40px;"><strong>₹{{ details.super_deluxe_price_per_person }}/-</strong></p>
-            <p>Per person</p>
-            {% for item in super_deluxe.splitlines %}
-            <p style="font-size: 17px;"><strong>{{ item }}</strong></p>
-            {% endfor %}
-            <a href="https://wa.me/9825010880" class="btn1">Inquiry On Whatsapp</a>
-            <p class="note" style="font-size: 20px;">Or Call on <span>98250 10880</span></p>
-        </div>
-        {% endif %}
-    </div>
-    
+ 
     
 
     <hr style="border: 2px solid red; ">
@@ -434,60 +602,7 @@
 
 
 
-    <div class="container-xxl py-5" style="margin-top: -50px;">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="text-align: left;">
-                <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
-                <h1 class="mb-5">Itinerary of {{tour_name_before_package}} Package Tour</h1>
-            </div>
-
-            <div class="nav" style="">
-                <ul>
-                    {% for day in days_details %}
-                        <li class="" onclick="showContent({{ forloop.counter }})" style="background-color: #009FBD;">
-                           Day {{ forloop.counter }}
-                        </li>
-                    {% empty %}
-                        <li>No days wise details found for this tour.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <div class="content">
-                {% for day in days_details %}
-                    <div id="content-day-{{ forloop.counter }}" class="content-day">
-                        <h2 class="mb-5"> <span style="color: black;">{{ day.day_wise_plan }}</span></h2>
-                        <ul class="mb-5" style="margin-top: -30px;">
-                            {% for part in day.description_split %}
-                                <li>{{ part }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
-            </div>
-            
-            
-
-            <script>
-                function showContent(dayNumber) {
-                    // Hide all content
-                    document.querySelectorAll('.content-day').forEach((content) => {
-                        content.classList.remove('active');
-                    });
-
-                    // Show the selected day's content
-                    document.getElementById(`content-day-${dayNumber}`).classList.add('active');
-                }
-
-                // Automatically show the first day's content if available
-                document.addEventListener("DOMContentLoaded", () => {
-                    const firstContent = document.querySelector('.content-day');
-                    if (firstContent) firstContent.classList.add('active');
-                });
-            </script>
-        </div>
-    </div>
-    <hr style="border: 2px solid red; margin-top: -70px;">
+  
            
     </div>
 </div>
@@ -565,7 +680,7 @@
                 </div>
             </div>
             <div class="col wow fadeInUp" data-wow-delay="0.3s" >
-                <h6 class="section-title bg-white text-start text-primary pe-6">Summary</h6>
+                <!-- <h6 class="section-title bg-white text-start text-primary pe-6">Summary</h6> -->
                 <h1 class="mb-6">Summary of<span class="text-primary">  <b style="color: #33cccc;">{{tour_name_before_package}}</b> </span>Tour</h1>
 
                 <div class="row gy-2 gx-4 mb-4">
@@ -698,121 +813,7 @@
     <!-- Booking Start -->
     
 
-    <div class="container-xxl py-5">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">International packages</h6>
-            {% if details.tour_type == 'international'%}
-            <h1 class="mb-5">Explore Upcoming International Tour Packages</h1>
-            {% endif %}
-            {% if details.tour_type == 'domestic'%}
-            <h1 class="mb-5">Explore Upcoming Domestic Tour Packages</h1>
-            {% endif %}
-        </div>
-
-        <!-- Swiper Slider -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                
-                {% if details.tour_type == 'international'%}
-                {% for x in tours_international %}
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                    <div class="destination-card">
-                        <div class="col-lg-12 col-md-6 wow fadeInUp" data-wow-delay="0.1s" >
-                            <div class="package-item" style=" border: 1px solid #ffb3b3;">
-                                <div class="overflow-hidden">
-        
-                                {% if x.image %}
-                                
-                                    <img class="img-fluid" src="{{ x.image.url }}" alt="" style="height: 150px; width: 100%;">
-                                {% else %}
-                                    <img class="img-fluid" src="default-image.jpg" alt="Default image" style="height: 200px;">
-                                {% endif %}
-                                </div>
-                                <div class="d-flex border-bottom">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{x.tour_name}}</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3 days</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                                </div>
-                                <div class="text-center p-4">
-                                    <h3 class="mb-0">₹ {{x.deluxe_price_per_person}}/-</h3>
-                                    <h8 class="mb-0">Per - Person</h8>
-                                    <div class="mb-3">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
-                                    <p  style=" font-size: 17px; color: gray;"><strong>{{x.tour_name}}</strong></p>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                        <!-- <a href="accounts/package_details.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
-                                        
-                                        
-                                        <a href="{% url 'package_details' x.id %}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% endif %}
-
-                {% if details.tour_type == 'domestic'%}
-                {% for x in tours_domestic %}
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                    <div class="destination-card">
-                        <div class="col-lg-12 col-md-6 wow fadeInUp" data-wow-delay="0.1s" >
-                            <div class="package-item" style=" border: 1px solid #ffb3b3;">
-                                <div class="overflow-hidden">
-        
-                                {% if x.image %}
-                                
-                                    <img class="img-fluid" src="{{ x.image.url }}" alt="" style="height: 150px; width: 100%;">
-                                {% else %}
-                                    <img class="img-fluid" src="default-image.jpg" alt="Default image" style="height: 200px;">
-                                {% endif %}
-                                </div>
-                                <div class="d-flex border-bottom">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{x.tour_name}}</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3 days</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                                </div>
-                                <div class="text-center p-4">
-                                    <h3 class="mb-0">₹ {{x.deluxe_price_per_person}}/-</h3>
-                                    <h8 class="mb-0">Per - Person</h8>
-                                    <div class="mb-3">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
-                                    <p  style=" font-size: 17px; color: gray;"><strong>{{x.tour_name}}</strong></p>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                        <!-- <a href="accounts/package_details.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a> -->
-                                        
-                                        
-                                        <a href="{% url 'package_details' x.id %}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% endif %}
-                
-                <!-- Slide 2 -->
-            </div>
-
-
-        </div>
-    </div>
+   
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* body {
