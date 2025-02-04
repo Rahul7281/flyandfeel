@@ -155,9 +155,9 @@ EMAIL_HOST_USER = 'rahulsuthar7281@gmail.com'
 EMAIL_HOST_PASSWORD = 'ovto rjhd juxv vyip'
 
 # Twilio credentials (you can store these in settings.py for security)
-TWILIO_PHONE_NUMBER = '+14155238886'  # Your Twilio WhatsApp number
-TWILIO_SID = 'ACe19b40fdf578138cbc59edb8bb0be5be'
-TWILIO_AUTH_TOKEN = 'e711af4472185edaa9a5885e031f97d4'
+# TWILIO_PHONE_NUMBER = '+14155238886'  # Your Twilio WhatsApp number
+# TWILIO_SID = 'ACe19b40fdf578138cbc59edb8bb0be5be'
+# TWILIO_AUTH_TOKEN = 'e711af4472185edaa9a5885e031f97d4'
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
