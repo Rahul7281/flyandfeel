@@ -116,6 +116,17 @@ DATABASES = {
 # }
 
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'flyandfeel',                  
+        'USER': 'root',                     
+        'PASSWORD': 'root',              
+        'HOST': 'localhost',                  
+        'PORT': '3306',                       
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -135,6 +146,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'rahulsuthar7281@gmail.com'
+EMAIL_HOST_PASSWORD = 'ovto rjhd juxv vyip'
+
+# Twilio credentials (you can store these in settings.py for security)
+TWILIO_PHONE_NUMBER = '+14155238886'  # Your Twilio WhatsApp number
+TWILIO_SID = 'ACe19b40fdf578138cbc59edb8bb0be5be'
+TWILIO_AUTH_TOKEN = 'e711af4472185edaa9a5885e031f97d4'
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -151,11 +174,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = 'staticfiles'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

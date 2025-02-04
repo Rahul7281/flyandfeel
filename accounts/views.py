@@ -2,6 +2,8 @@ import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+
+from flyandfeel.settings import TWILIO_AUTH_TOKEN, TWILIO_SID
 from .models import Booking, CustomUser, Destination, TourDay, Tourist
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -16,6 +18,13 @@ from django.contrib.auth import authenticate, login
 import re
 from django.shortcuts import get_object_or_404, render
 from .models import Tour, TourDay
+from django.core.mail import send_mail
+from twilio.rest import Client
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import redirect
+from twilio.base.exceptions import TwilioRestException
+
 
 def index(request):
 
@@ -214,47 +223,39 @@ def Domestic_packges(request):
 #         'deluxe': formatted_data5,
 #         'super_deluxe': formatted_data6,
 #     })
-@login_required(login_url='signin') 
+
+
+@login_required(login_url='signin')
 def package_details(request, id):
-    # Fetch the package object based on the ID
     details = get_object_or_404(Tour, id=id)
-    # days_details = get_object_or_404(TourDay, id=id)
     days_details = TourDay.objects.filter(tour_id=id).order_by('id')
     for day in days_details:
-        # Split the description by 3 or more consecutive spaces
         day.description_split = re.split(r'\s{3,}', day.description)
     tour = Tour.objects.filter(id=id).first()
 
-    # Check if tour exists to avoid errors
     if tour:
         total_night = tour.total_night
         total_days = tour.total_days
-
-        # Extract start and end dates
         start_date = tour.start_date
         end_date = tour.end_date
-        
-        # Extract months from start_date and end_date
-        start_month = start_date.strftime('%B')  # '%B' gives the full month name (e.g., April)
-        end_month = end_date.strftime('%B')      # '%B' gives the full month name (e.g., May)
-
+        start_month = start_date.strftime('%B')
+        end_month = end_date.strftime('%B')
     else:
-        total_night = total_days = start_month = end_month = None  # Handle case where no such tour exists
-
+        total_night = total_days = start_month = end_month = None
 
     Tours = Tour.objects.all()
     tours_international = Tour.objects.filter(tour_type='international')
     tours_domestic = Tour.objects.filter(tour_type='domestic')
     image = details.image
     tour_name_before_package = details.tour_name.split("Package")[0].strip()
-        # Calculate days and nights
+
     if details.start_date and details.end_date:
         duration = (details.end_date - details.start_date).days
-        nights = max(0, duration - 1)  # At least 0 nights
+        nights = max(0, duration - 1)
     else:
         duration = nights = None
 
-    # Process fields like 'include', 'not_include', etc.
+    # Process raw data fields
     def process_raw_data(field):
         raw_data = getattr(details, field, None)
         return raw_data.replace('\r\n\r\n', '\n') if raw_data else None
@@ -269,7 +270,6 @@ def package_details(request, id):
     formatted_data5 = process_raw_data('deluxe')
     formatted_data6 = process_raw_data('super_deluxe')
 
-    # Handle tourist form submission
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -280,63 +280,59 @@ def package_details(request, id):
         number_of_people = request.POST.get('number_of_people')
         total_amount = request.POST.get('total_amount')
 
-        # Set default values for payment and booking status
         payment_status = "Pending"
         booking_status = "Pending"
 
-        # Check if the user is logged in and associate the user ID
         if request.user.is_authenticated:
             user = request.user
         else:
-            # You can redirect or show an error if the user is not logged in
             messages.error(request, "You need to be logged in to make a booking.")
-            return redirect('login')  # Assuming you have a 'login' URL
+            return redirect('login')
 
-        # Save the tourist data and associate it with the selected tour
         tourist = Tourist.objects.create(
             first_name=first_name,
             last_name=last_name,
             email=email,
             phone_number=phone_number,
             number_of_people=number_of_people,
-            tour=details,  # Assign the Tour object to the tourist
-            user=user  # Associate the logged-in user
+            tour=details,
+            user=user
         )
 
-        # Ensure the 'tour' is being passed correctly to the Booking creation
         if details:
-            Booking.objects.create(
+            booking = Booking.objects.create(
                 tourist=tourist,
-                tour=details,  # Pass the 'details' object correctly here
+                tour=details,
                 number_of_people=number_of_people,
                 total_amount=int(total_amount) * int(number_of_people),
                 payment_status=payment_status,
                 booking_status=booking_status,
-                user=user  # Associate the user with the booking
+                user=user
             )
 
-        # After saving the data, add a success message and redirect
+        # Send a WhatsApp message
+        send_whatsapp_message(phone_number, first_name, last_name, details.tour_name, total_amount, number_of_people)
+        # Send an Email
+        send_confirmation_email(email, first_name, last_name, details.tour_name)
+
         messages.success(request, "Your booking has been successfully submitted!")
-        
         return redirect('package_details', id=id)
 
-    # Fetch tourists associated with the package
     tourists = details.tourists.all()
 
-    # Pass all necessary context data to the template
     return render(request, 'package_details.html', {
         'image': image,
         'Tours': Tours,
-        'tours_international':tours_international,
-        'tours_domestic':tours_domestic,
-        'total_night':total_night,
-        'total_days':total_days,
-        'start_month':start_month,
-        'end_month':end_month,
+        'tours_international': tours_international,
+        'tours_domestic': tours_domestic,
+        'total_night': total_night,
+        'total_days': total_days,
+        'start_month': start_month,
+        'end_month': end_month,
         'details': details,
         'days_details': days_details,
         'duration': duration,
-         'nights': nights,
+        'nights': nights,
         'tour_name_before_package': tour_name_before_package,
         'include': formatted_data,
         'not_include': formatted_data1,
@@ -349,6 +345,94 @@ def package_details(request, id):
         'super_deluxe': formatted_data6,
         'tourists': tourists,
     })
+
+
+def send_whatsapp_message(phone_number, first_name, last_name, tour_name, total_amount, number_of_people):
+    """Send a professional WhatsApp message using Twilio"""
+    try:
+        # Ensure the phone number starts with the correct country code (+91 for India)
+        if not phone_number.startswith('+'):
+            phone_number = f'+91{phone_number}'  # Example for India (change as needed for your country)
+
+        # Print to check the phone number format
+        print(f"Phone number being used: {phone_number}")
+
+        # Initialize Twilio client
+        client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
+        
+        # Format the message (using WhatsApp supported text formatting)
+        message = f"""
+Hello *{first_name} {last_name}*,
+
+Thank you for booking your tour with us! We're excited to confirm your booking for the *'{tour_name}'* tour.
+
+*Booking Details:*
+- Tour Name: {tour_name}
+- Booking Status: *Confirmed*
+- Customer Name: {first_name} {last_name}
+- Total Tickets: {number_of_people}
+- Total Amount: ₹{total_amount}
+
+We will send you further details as your tour date approaches.
+
+If you have any questions, feel free to contact our support team at [support@example.com].
+
+Thank you for choosing *Fly n Feel Holidays (I) Pvt. Ltd.*! We're looking forward to seeing you on the tour.
+
+Best regards,  
+*The Fly n Feel Holidays (I) Pvt. Ltd. Team*  
+https://rahulsuthar7281.pythonanywhere.com/
+"""
+        
+        # Send the message using the Twilio WhatsApp-enabled number
+        client.messages.create(
+            body=message,  # Custom message content
+            from_='whatsapp:+14155238886',  # Your Twilio WhatsApp-enabled number
+            to=f'whatsapp:{phone_number}'  # Recipient's phone number (formatted correctly)
+        )
+        
+        print("Message sent successfully!")
+
+    except TwilioRestException as e:
+        print(f"Error occurred: {e}")
+        print(f"Error details: {e.details}")
+
+def send_confirmation_email(email, first_name, last_name, tour_name):
+    """Send a professional booking confirmation email."""
+    subject = f"Booking Confirmation for {tour_name}"
+    
+    # Professionally formatted email body
+    message = f"""
+    Dear {first_name} {last_name},
+
+    Thank you for booking your tour with us! We are excited to confirm your booking for the '{tour_name}' tour.
+
+    Below are the details of your booking:
+
+    ----------------------------------------
+    Tour Name: {tour_name}
+    Booking Status: Confirmed
+    Customer Name: {first_name} {last_name}
+    Email: {email}
+    ----------------------------------------
+
+    We will send you further details closer to your departure date.
+
+    If you have any questions or need assistance, feel free to reach out to our support team at [support@example.com].
+
+    Thank you for choosing us, and we look forward to seeing you on the tour!
+
+    Best regards,
+    The Fly n Feel Holidays (I) Pvt. Ltd. Team
+    https://rahulsuthar7281.pythonanywhere.com/
+    """
+
+    from_email = settings.EMAIL_HOST_USER  # Your email address
+    send_mail(subject, message, from_email, [email])
+
+    print("Confirmation email sent successfully.")
+
+
 
 @csrf_exempt
 def signin(request):
